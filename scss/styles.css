@@ -179,6 +179,7 @@ body {
 }
 .todolist__deletebutton {
   width: 20px;
+  cursor: pointer;
 }
 .todolist__item {
   display: -webkit-box;

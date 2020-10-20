@@ -50,10 +50,10 @@ todoInputEl.addEventListener("keyup", (event) => {
   }
 });
 
-todoButtonEl.addEventListener("click", () => {
+todoButtonEl.addEventListener("click", async () => {
   const todo = { description: todoInputEl.value, done: true };
   todoInputEl.value = ""; // clear the input field after submit
-  postData(todo);
-  renderTodoList();
-  getData().then((data) => console.log(data));
+  await postData(todo);
+  await renderTodoList();
+  await getData().then((data) => console.log(data));
 });
