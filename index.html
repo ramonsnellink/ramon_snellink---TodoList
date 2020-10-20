@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="./api-client.js"></script>
+    <script defer src="./script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./scss/styles.css" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <section class="addtodo">
+        <input type="text" name="todo" id="addtodo__field" size="30" />
+        <button class="addtodo__button">Add</button>
+      </section>
+
+      <section class="todolist">
+        <h1 class="todolist__title">Todo List</h1>
+        <ul class="todolist__list"></ul>
+      </section>
+    </main>
+  </body>
 </html>
