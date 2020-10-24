@@ -15,29 +15,30 @@ const getTodoList = async () => {
   return todoList;
 };
 
+const renderSingleTodo = (todo) => {
+  const todoEl = document.createElement("li");
+  todoEl.classList.add("todolist__item");
+
+  // delete button
+  const deleteButton = document.createElement("img");
+  deleteButton.src = "./img/dustbin.png";
+  deleteButton.classList.add("todolist__deletebutton");
+
+  deleteButton.addEventListener("click", () => {
+    deleteData(todo.id); // send delete request
+    todoEl.parentNode.removeChild(todoEl); // remove the element from DOM
+  });
+
+  todoEl.innerHTML = todo.description;
+  todoEl.appendChild(deleteButton);
+  todoListEl.appendChild(todoEl);
+
+  return todoEl;
+};
+
 const renderTodoList = async () => {
   const todoList = await getTodoList();
-  todoListEl.innerHTML = ""; // clear the list
-  todoList.map((todo) => {
-    const todoEl = document.createElement("li");
-    todoEl.classList.add("todolist__item");
-
-    // delete button
-    const deleteButton = document.createElement("img");
-    deleteButton.src = "./img/dustbin.png";
-    deleteButton.classList.add("todolist__deletebutton");
-
-    deleteButton.addEventListener("click", () => {
-      deleteData(todo.id); // send delete request
-      todoEl.parentNode.removeChild(todoEl); // remove the element from DOM
-    });
-
-    todoEl.innerHTML = todo.description;
-    todoEl.appendChild(deleteButton);
-    todoListEl.appendChild(todoEl);
-
-    return todoEl;
-  });
+  todoList.map((todo) => renderSingleTodo(todo));
 };
 
 renderTodoList(); // first render of the TODO list
@@ -53,7 +54,6 @@ todoInputEl.addEventListener("keyup", (event) => {
 todoButtonEl.addEventListener("click", async () => {
   const todo = { description: todoInputEl.value, done: true };
   todoInputEl.value = ""; // clear the input field after submit
-  await postData(todo);
-  await renderTodoList();
-  await getData().then((data) => console.log(data));
+  postData(todo);
+  renderSingleTodo(todo);
 });
